@@ -28,4 +28,5 @@ project "Spd Logging"
         "spdlog"
     }
 
+    RegisterPlugin("Spd Logging")
     ToyboxPluginConfigs()
