@@ -11,16 +11,25 @@ project "Spd Logging"
 
     files
     {
-        "./**.h",
-        "./**.c",
-        "./**.hpp",
-        "./**.cpp"
+        "./Source/**.h",
+        "./Source/**.c",
+        "./Source/**.cc",
+        "./Source/**.hpp",
+        "./Source/**.cpp",
+        "./Include/**.h",
+        "./Include/**.c",
+        "./Include/**.cc",
+        "./Include/**.hpp",
+        "./Include/**.cpp",
+        "./**.plugin",
+        "./**.md",
+        "./*.lua"
     }
 
     includedirs
     {
         "./Source",
-        "./3rd Party/spdlog"
+        "%{Using.spdlog}"
     }
 
     links

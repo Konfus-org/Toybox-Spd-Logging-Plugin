@@ -26,6 +26,6 @@ namespace SpdLogging
         Tbx::UID _openLogEventId = -1;
         Tbx::UID _closeLogEventId = -1;
     };
-}
 
-TBX_REGISTER_PLUGIN(SpdLogging::SpdLoggerPlugin);
+    TBX_REGISTER_PLUGIN(SpdLoggerPlugin);
+}
