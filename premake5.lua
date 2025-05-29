@@ -3,39 +3,26 @@ project "Spd Logging"
     language "C++"
     cppdialect "C++20"
     staticruntime "Off"
-    ignoredefaultlibraries { "MSVCRT" }
-    externalwarnings "Off"
 
-    targetdir ("../../" .. OutputTargetPluginDir .. "")
-    objdir    ("../../" .. OutputIntermediatePluginDir .. "")
+    RegisterDynamicPlugin("Spd Logging")
 
     files
     {
-        "./Source/**.h",
-        "./Source/**.c",
-        "./Source/**.cc",
-        "./Source/**.hpp",
-        "./Source/**.cpp",
-        "./Include/**.h",
-        "./Include/**.c",
-        "./Include/**.cc",
-        "./Include/**.hpp",
-        "./Include/**.cpp",
-        "./**.plugin",
+        "./**.hpp",
+        "./**.cpp",
+        "./**.h",
+        "./**.c",
         "./**.md",
-        "./*.lua"
+        "./**.lua",
+        "./**.txt",
+        "./**.plugin"
     }
-
     includedirs
     {
         "./Source",
-        "%{Using.spdlog}"
+        _MAIN_SCRIPT_DIR .. "/Dependencies/spdlog/include"
     }
-
     links
     {
         "spdlog"
     }
-
-    RegisterPlugin("Spd Logging")
-    ToyboxPluginConfigs()
