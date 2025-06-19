@@ -1,24 +1,36 @@
 #pragma once
-#include <Tbx/Systems/Debug/ILogger.h>
+#include <Tbx/Plugin API/RegisterPlugin.h>
+#include <Tbx/Events/EventCoordinator.h>
+#include <Tbx/Events/LogEvents.h>
+#include <Tbx/Ids/UID.h>
 #include <spdlog/spdlog.h>
 
 namespace SpdLogging
 {
-    class SpdLogger : public Tbx::ILogger
+    class SpdLogger final : public Tbx::ILoggerPlugin
     {
     public:
-        SpdLogger() = default;
-        ~SpdLogger() override;
+        void OnLoad() override;
+        void OnUnload() override;
 
-        bool IsOpen() { return _spdLogger != nullptr; }
-        void Open(const std::string& name, const std::string& filePath) final;
-        void Close() final;
-        void Log(int lvl, const std::string& msg) final;
-        void Flush() final;
-        std::string GetName() final { return _spdLogger->name(); }
+        void Open(const std::string& name, const std::string& filePath) override;
+        void Close() override;
+        void Log(int lvl, const std::string& msg) override;
+        void Flush() override;
+        std::string GetName() override { return _spdLogger->name(); }
 
     private:
+        void OnWriteToLogEvent(Tbx::WriteLineToLogRequest& e);
+        void OnOpenLogEvent(Tbx::OpenLogRequest& e);
+        void OnCloseLogEvent(Tbx::CloseLogRequest& e);
+
+        Tbx::UID _writeToLogEventId = -1;
+        Tbx::UID _openLogEventId = -1;
+        Tbx::UID _closeLogEventId = -1;
+
         std::shared_ptr<spdlog::logger> _spdLogger;
     };
+
+    TBX_REGISTER_PLUGIN(SpdLogger);
 }
 
