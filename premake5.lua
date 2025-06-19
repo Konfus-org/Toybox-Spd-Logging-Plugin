@@ -4,8 +4,6 @@ project "Spd Logging"
     cppdialect "C++20"
     staticruntime "Off"
 
-    RegisterDynamicPlugin("Spd Logging")
-
     files
     {
         "./**.hpp",
@@ -13,8 +11,6 @@ project "Spd Logging"
         "./**.h",
         "./**.c",
         "./**.md",
-        "./**.lua",
-        "./**.txt",
         "./**.plugin"
     }
     includedirs
@@ -26,3 +22,5 @@ project "Spd Logging"
     {
         "spdlog"
     }
+
+    RegisterDynamicPlugin("Spd Logging")
