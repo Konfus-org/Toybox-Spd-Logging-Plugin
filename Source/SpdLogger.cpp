@@ -5,41 +5,9 @@
 
 namespace SpdLogging
 {
-    void SpdLogger::OnLoad()
-    {
-        _writeToLogEventId = Tbx::EventCoordinator::Subscribe<Tbx::WriteLineToLogRequest>(TBX_BIND_FN(OnWriteToLogEvent));
-        _openLogEventId = Tbx::EventCoordinator::Subscribe<Tbx::OpenLogRequest>(TBX_BIND_FN(OnOpenLogEvent));
-        _closeLogEventId = Tbx::EventCoordinator::Subscribe<Tbx::CloseLogRequest>(TBX_BIND_FN(OnCloseLogEvent));
-    }
-
-    void SpdLogger::OnUnload()
-    {
-        Tbx::EventCoordinator::Unsubscribe<Tbx::WriteLineToLogRequest>(_writeToLogEventId);
-        Tbx::EventCoordinator::Unsubscribe<Tbx::OpenLogRequest>(_openLogEventId);
-        Tbx::EventCoordinator::Unsubscribe<Tbx::CloseLogRequest>(_closeLogEventId);
-
-        Close();
-
-        spdlog::drop_all();
-    }
-
-    void SpdLogger::OnWriteToLogEvent(Tbx::WriteLineToLogRequest& e)
-    {
-        if (_spdLogger == nullptr) Open(e.GetLogName(), e.GetLogFilePath());
-        Log((int)e.GetLogLevel(), e.GetLineToWriteToLog());
-        e.IsHandled = true;
-    }
-
-    void SpdLogger::OnOpenLogEvent(Tbx::OpenLogRequest& e)
-    {
-        Open(e.GetLogName(), e.GetLogFilePath());
-        e.IsHandled = true;
-    }
-
-    void SpdLogger::OnCloseLogEvent(Tbx::CloseLogRequest& e)
+    SpdLogger::~SpdLogger()
     {
         Close();
-        e.IsHandled = true;
     }
 
     void SpdLogger::Open(const std::string& name, const std::string& filePath)
@@ -80,7 +48,7 @@ namespace SpdLogging
         _spdLogger = nullptr;
     }
 
-    void SpdLogger::Log(int lvl, const std::string& msg)
+    void SpdLogger::Write(int lvl, const std::string& msg)
     {
         _spdLogger->log(spdlog::source_loc{}, (spdlog::level::level_enum)lvl, msg);
     }
