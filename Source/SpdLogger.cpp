@@ -12,9 +12,6 @@ namespace SpdLogging
 
     void SpdLogger::Open(const std::string& name, const std::string& filePath)
     {
-        // First close any logs we may have open
-        Close(); // TODO: support multiple logs at once!
-
         // Create console and file sinks
         auto consoleSink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
 

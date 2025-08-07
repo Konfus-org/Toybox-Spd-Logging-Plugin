@@ -5,9 +5,13 @@ namespace SpdLogging
 {
     class SpdLoggerFactory : public Tbx::ILoggerFactoryPlugin
     {
+    public:
         void OnLoad() override;
         void OnUnload() override;
-        std::shared_ptr<Tbx::ILogger> Create(const std::string& name, const std::string filePath = "") override;
+
+    protected:
+        Tbx::ILogger* New() override;
+        void Delete(Tbx::ILogger* logger) override;
     };
 
 

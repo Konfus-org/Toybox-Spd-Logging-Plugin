@@ -9,18 +9,17 @@ namespace SpdLogging
 
     void SpdLoggerFactory::OnUnload()
     {
-        spdlog::drop_all();
+        spdlog::shutdown();
     }
 
-    void DeleteLogger(SpdLogger* loggerToDelete)
+    Tbx::ILogger* SpdLoggerFactory::New()
     {
-        delete loggerToDelete;
+        auto* logger = new SpdLogger();
+        return logger;
     }
 
-    std::shared_ptr<Tbx::ILogger> SpdLoggerFactory::Create(const std::string& name, const std::string filePath)
+    void SpdLoggerFactory::Delete(Tbx::ILogger* logger)
     {
-        auto* newLogger = new SpdLogger();
-        newLogger->Open(name, filePath);
-        return std::shared_ptr<SpdLogger>(newLogger, [](SpdLogger* loggerToDelete) { DeleteLogger(loggerToDelete); });
+        delete logger;
     }
 }
