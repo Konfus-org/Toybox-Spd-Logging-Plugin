@@ -3,7 +3,7 @@ project "Spd Logging"
     language "C++"
     cppdialect "C++20"
     staticruntime "Off"
-
+    
     files
     {
         "./**.hpp",

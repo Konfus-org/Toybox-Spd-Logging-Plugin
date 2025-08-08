@@ -9,9 +9,11 @@ namespace SpdLogging
         void OnLoad() override;
         void OnUnload() override;
 
+        std::shared_ptr<Tbx::ILogger> Create(const std::string& name, const std::string filePath) override;
+
     protected:
-        Tbx::ILogger* New() override;
-        void Delete(Tbx::ILogger* logger) override;
+        Tbx::ILogger* New();
+        void Delete(Tbx::ILogger* logger);
     };
 
 

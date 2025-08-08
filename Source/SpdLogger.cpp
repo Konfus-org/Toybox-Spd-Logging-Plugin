@@ -33,13 +33,11 @@ namespace SpdLogging
         // Set up and register the logger
         _spdLogger->set_pattern("%^[%T]: %v%$");
         _spdLogger->set_level(spdlog::level::level_enum::trace);
-        spdlog::register_logger(_spdLogger);
+        spdlog::initialize_logger(_spdLogger);
     }
 
     void SpdLogger::Close()
     {
-        if (_spdLogger == nullptr) return;
-
         Flush();
         spdlog::drop(_spdLogger->name());
         _spdLogger = nullptr;
