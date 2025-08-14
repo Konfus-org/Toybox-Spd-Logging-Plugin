@@ -17,10 +17,6 @@ namespace SpdLogging
         std::string GetName() override { return _spdLogger->name(); }
 
     private:
-        Tbx::UID _writeToLogEventId = -1;
-        Tbx::UID _openLogEventId = -1;
-        Tbx::UID _closeLogEventId = -1;
-
         std::shared_ptr<spdlog::logger> _spdLogger;
     };
 }
