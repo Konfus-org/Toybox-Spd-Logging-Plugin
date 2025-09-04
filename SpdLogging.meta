@@ -1,6 +1,6 @@
 {
     "name": "Spd Logging",
-    "lib": "Spd Logging.dll",
+    "lib": "SpdLogging.dll",
     "type": [
         "Logger Factory"
     ],
