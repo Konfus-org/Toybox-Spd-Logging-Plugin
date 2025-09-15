@@ -1,6 +1,5 @@
 #pragma once
-#include <Tbx/Events/EventCoordinator.h>
-#include <Tbx/Ids/UID.h>
+#include <Tbx/Debug/ILogger.h>
 #include <spdlog/spdlog.h>
 
 namespace SpdLogging

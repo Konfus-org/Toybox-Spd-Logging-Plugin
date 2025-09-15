@@ -1,12 +1,13 @@
 #pragma once
-#include <Tbx/PluginAPI/RegisterPlugin.h>
+#include <Tbx/Plugins/Plugin.h>
+#include <Tbx/Debug/ILogger.h>
 
 namespace SpdLogging
 {
-    class SpdLoggerFactory : public Tbx::ILoggerFactoryPlugin
+    class SpdLoggerFactory : public Tbx::ILoggerFactory, public Tbx::Plugin
     {
     public:
-        void OnLoad() override;
+        SpdLoggerFactory(const std::weak_ptr<Tbx::App>& app) {}
         void OnUnload() override;
 
         std::shared_ptr<Tbx::ILogger> Create(const std::string& name, const std::string filePath) override;

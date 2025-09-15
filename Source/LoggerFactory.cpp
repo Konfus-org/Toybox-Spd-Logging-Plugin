@@ -3,10 +3,6 @@
 
 namespace SpdLogging
 {
-    void SpdLoggerFactory::OnLoad()
-    {
-    }
-
     void SpdLoggerFactory::OnUnload()
     {
         spdlog::shutdown();
