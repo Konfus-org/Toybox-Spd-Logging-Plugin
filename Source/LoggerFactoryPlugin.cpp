@@ -1,27 +1,27 @@
-#include "LoggerFactory.h"
+#include "LoggerFactoryPlugin.h"
 #include "SpdLogger.h"
 
 namespace SpdLogging
 {
-    void SpdLoggerFactory::OnUnload()
+    void SpdLoggerFactoryPlugin::OnUnload()
     {
         spdlog::shutdown();
     }
 
-    std::shared_ptr<Tbx::ILogger> SpdLoggerFactory::Create(const std::string& name, const std::string filePath)
+    std::shared_ptr<Tbx::ILogger> SpdLoggerFactoryPlugin::Create(const std::string& name, const std::string filePath)
     {
         auto logger = std::shared_ptr<Tbx::ILogger>(New(), [this](Tbx::ILogger* logger) { Delete(logger); });
         logger->Open(name, filePath);
         return logger;
     }
 
-    Tbx::ILogger* SpdLoggerFactory::New()
+    Tbx::ILogger* SpdLoggerFactoryPlugin::New()
     {
         auto* logger = new SpdLogger();
         return logger;
     }
 
-    void SpdLoggerFactory::Delete(Tbx::ILogger* logger)
+    void SpdLoggerFactoryPlugin::Delete(Tbx::ILogger* logger)
     {
         delete logger;
     }

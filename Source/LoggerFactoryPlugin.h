@@ -4,10 +4,12 @@
 
 namespace SpdLogging
 {
-    class SpdLoggerFactory : public Tbx::ILoggerFactory, public Tbx::Plugin
+    class SpdLoggerFactoryPlugin
+        : public Tbx::Plugin
+        , public Tbx::ILoggerFactory
     {
     public:
-        SpdLoggerFactory(const std::weak_ptr<Tbx::App>& app) {}
+        SpdLoggerFactoryPlugin(std::weak_ptr<Tbx::App> app) {}
         void OnUnload() override;
 
         std::shared_ptr<Tbx::ILogger> Create(const std::string& name, const std::string filePath) override;
@@ -17,7 +19,6 @@ namespace SpdLogging
         void Delete(Tbx::ILogger* logger);
     };
 
-
-    TBX_REGISTER_PLUGIN(SpdLoggerFactory);
+    TBX_REGISTER_PLUGIN(SpdLoggerFactoryPlugin);
 }
 

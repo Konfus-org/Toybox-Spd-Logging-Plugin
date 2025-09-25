@@ -11,6 +11,12 @@ namespace SpdLogging
 
     void SpdLogger::Open(const std::string& name, const std::string& filePath)
     {
+        if (_spdLogger)
+        {
+            // Logger already exists, close it first
+            Close();
+        }
+
         // Create console and file sinks
         auto consoleSink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
 
