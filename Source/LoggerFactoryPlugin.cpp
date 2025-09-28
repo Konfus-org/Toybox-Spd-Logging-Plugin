@@ -3,7 +3,13 @@
 
 namespace SpdLogging
 {
-    void SpdLoggerFactoryPlugin::OnUnload()
+    SpdLoggerFactoryPlugin::SpdLoggerFactoryPlugin(std::weak_ptr<Tbx::App> app)
+        : Tbx::Plugin(app)
+    {
+
+    }
+
+    SpdLoggerFactoryPlugin::~SpdLoggerFactoryPlugin()
     {
         spdlog::shutdown();
     }
