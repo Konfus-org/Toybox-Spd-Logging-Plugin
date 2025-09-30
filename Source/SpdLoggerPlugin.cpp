@@ -1,15 +1,21 @@
-#include "SpdLogger.h"
+#include "SpdLoggerPlugin.h"
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/basic_file_sink.h>
 
 namespace SpdLogging
 {
-    SpdLogger::~SpdLogger()
+    SpdLoggerPlugin::SpdLoggerPlugin(std::weak_ptr<Tbx::App> app)
+        : Tbx::Plugin(app)
     {
-        Close();
     }
 
-    void SpdLogger::Open(const std::string& name, const std::string& filePath)
+    SpdLoggerPlugin::~SpdLoggerPlugin()
+    {
+        Close();
+        spdlog::shutdown();
+    }
+
+    void SpdLoggerPlugin::Open(const std::string& name, const std::string& filePath)
     {
         if (_spdLogger)
         {
@@ -41,19 +47,19 @@ namespace SpdLogging
         spdlog::initialize_logger(_spdLogger);
     }
 
-    void SpdLogger::Close()
+    void SpdLoggerPlugin::Close()
     {
         Flush();
         spdlog::drop(_spdLogger->name());
         _spdLogger = nullptr;
     }
 
-    void SpdLogger::Write(int lvl, const std::string& msg)
+    void SpdLoggerPlugin::Write(int lvl, const std::string& msg)
     {
         _spdLogger->log(spdlog::source_loc{}, (spdlog::level::level_enum)lvl, msg);
     }
 
-    void SpdLogger::Flush()
+    void SpdLoggerPlugin::Flush()
     {
         _spdLogger->flush();
     }
