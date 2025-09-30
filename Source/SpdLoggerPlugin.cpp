@@ -4,8 +4,7 @@
 
 namespace SpdLogging
 {
-    SpdLoggerPlugin::SpdLoggerPlugin(std::weak_ptr<Tbx::App> app)
-        : Tbx::Plugin(app)
+    SpdLoggerPlugin::SpdLoggerPlugin(Tbx::Ref<Tbx::EventBus> eventBus)
     {
     }
 

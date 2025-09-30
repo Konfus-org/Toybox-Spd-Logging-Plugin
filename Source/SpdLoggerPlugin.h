@@ -6,11 +6,11 @@
 namespace SpdLogging
 {
     class SpdLoggerPlugin final
-        : public Tbx::Plugin
+        : public Tbx::IPlugin
         , public Tbx::ILogger
     {
     public:
-        SpdLoggerPlugin(std::weak_ptr<Tbx::App> app);
+        SpdLoggerPlugin(Tbx::Ref<Tbx::EventBus> eventBus);
         ~SpdLoggerPlugin() override;
         void Open(const std::string& name, const std::string& filePath) override;
         void Close() override;
