@@ -6,7 +6,7 @@
 namespace SpdLogging
 {
     class SpdLoggerPlugin final
-        : public Tbx::IPlugin
+        : public Tbx::Plugin
         , public Tbx::ILogger
     {
     public:
