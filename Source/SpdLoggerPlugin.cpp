@@ -2,9 +2,9 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/sinks/basic_file_sink.h>
 
-namespace SpdLogging
+namespace Tbx::Plugins::SpdLogging
 {
-    SpdLoggerPlugin::SpdLoggerPlugin(Tbx::Ref<Tbx::EventBus> eventBus)
+    SpdLoggerPlugin::SpdLoggerPlugin(Ref<EventBus> eventBus)
     {
     }
 

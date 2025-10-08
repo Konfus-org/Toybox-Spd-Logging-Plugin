@@ -3,14 +3,14 @@
 #include <Tbx/Debug/ILogger.h>
 #include <spdlog/spdlog.h>
 
-namespace SpdLogging
+namespace Tbx::Plugins::SpdLogging
 {
     class SpdLoggerPlugin final
-        : public Tbx::Plugin
-        , public Tbx::ILogger
+        : public Plugin
+        , public ILogger
     {
     public:
-        SpdLoggerPlugin(Tbx::Ref<Tbx::EventBus> eventBus);
+        SpdLoggerPlugin(Ref<EventBus> eventBus);
         ~SpdLoggerPlugin() override;
         void Open(const std::string& name, const std::string& filePath) override;
         void Close() override;
@@ -18,7 +18,7 @@ namespace SpdLogging
         void Flush() override;
 
     private:
-        Tbx::Ref<spdlog::logger> _spdLogger = nullptr;
+        Ref<spdlog::logger> _spdLogger = nullptr;
     };
 
     TBX_REGISTER_PLUGIN(SpdLoggerPlugin);
